@@ -1,0 +1,23 @@
+# Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+Host serverXX
+  HostName 62.234.201.16
+  User bridge
+  Port 22
+  PreferredAuthentications publickey
+  IdentityFile C:/Users/LEGION/.ssh/id_rsa
+Host internalmachine 
+  ProxyCommand C:\Windows\System32\OpenSSH\ssh.exe -q serverXX nc -q0 localhost 51000
+  User wangxianzhuo
+Host internalmachine_inict
+  HostName 10.2.5.140
+  User wangxianzhuo
+  Port 22
+  PreferredAuthentications publickey
+  IdentityFile C:/Users/LEGION/.ssh/id_rsa
+Host end
+  proxyCommand C:\Windows\System32\OpenSSH\ssh.exe -q internalmachine nc -q0 compute-v00 22
+  User wangxianzhuo
+Host ubuntuserver
+  HostName 157.245.49.158
+  User root
+  Port 22
