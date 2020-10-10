@@ -3,21 +3,18 @@ Host serverXX
   HostName 62.234.201.16
   User bridge
   Port 22
-  PreferredAuthentications publickey
-  IdentityFile C:/Users/LEGION/.ssh/id_rsa
 Host internalmachine 
-  ProxyCommand C:\Windows\System32\OpenSSH\ssh.exe -q serverXX nc -q0 localhost 51000
+  HostName localhost
+  Port 51000
   User wangxianzhuo
+  ProxyCommand C:\Windows\System32\OpenSSH\ssh.exe -W %h:%p serverXX
 Host internalmachine_inict
-  HostName 10.2.5.140
+  # HostName 10.2.5.140
+  HostName 10.208.128.253
   User wangxianzhuo
   Port 22
-  PreferredAuthentications publickey
-  IdentityFile C:/Users/LEGION/.ssh/id_rsa
 Host end
-  proxyCommand C:\Windows\System32\OpenSSH\ssh.exe -q internalmachine nc -q0 compute-v00 22
-  User wangxianzhuo
-Host ubuntuserver
-  HostName 157.245.49.158
-  User root
+  HostName compute-v01
   Port 22
+  User wangxianzhuo
+  ProxyCommand C:\Windows\System32\OpenSSH\ssh.exe -W %h:%p internalmachine_inict
